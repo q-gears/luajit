@@ -160,9 +160,7 @@ macro ( install_library )
                               SOVERSION ${DIST_VERSION} )
     endif ()
     install ( TARGETS ${_file}
-              RUNTIME DESTINATION ${INSTALL_BIN} COMPONENT Runtime
-              LIBRARY DESTINATION ${INSTALL_LIB} COMPONENT Runtime 
-              ARCHIVE DESTINATION ${INSTALL_LIB} COMPONENT Library )
+              RUNTIME DESTINATION . COMPONENT Runtime )
   endforeach()
 endmacro ()
 
