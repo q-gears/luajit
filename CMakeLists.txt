@@ -84,7 +84,8 @@ if ( WIN32 AND NOT CYGWIN )
   string ( REPLACE "/" ${LUA_DIRSEP} LUA_CPATH_DEFAULT "${LUA_CPATH_DEFAULT}" )
 
 elseif ( APPLE )
-  set ( CMAKE_EXE_LINKER_FLAGS "-pagezero_size 10000 -image_base 100000000 -image_base 7fff04c4a000" )
+# Required to prevent runtime crash on 64bit OSX - however this breaks 32bit compile
+#  set ( CMAKE_EXE_LINKER_FLAGS "-pagezero_size 10000 -image_base 100000000 -image_base 7fff04c4a000" )
   option ( LUA_USE_POSIX "Use POSIX functionality." ON )
   option ( LUA_USE_DLOPEN "Use dynamic linker to load modules." ON )
   set ( LJVM_MODE machasm )
