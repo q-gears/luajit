@@ -6,6 +6,11 @@
 
 # NOTE: This build is currently only supporting x86 targets, for other targets use the original makefile. Please do not submit bugs to the LuaJIT author in case this build fails, instead use http://github.com/LuaDist/luajit
 
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32")
+#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32")
+
+
+
 project ( luajit C ASM)
 cmake_minimum_required ( VERSION 2.8 )
 include ( cmake/dist.cmake )
@@ -305,11 +310,18 @@ set ( LJCORE_C
 )
 
 add_library ( liblua SHARED ${LJCORE_C} ${DEPS} )
+set_target_properties(liblua PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
 target_link_libraries ( liblua ${LIBS} )
+if (APPLE)
 set_target_properties ( liblua PROPERTIES OUTPUT_NAME lua CLEAN_DIRECT_OUTPUT 1 )
+endif()
 
 ## LuaJIT Executable
 add_executable ( luajit src/luajit.c src/luajit.rc )
+if (APPLE)
+set_target_properties(luajit PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
+endif()
+
 target_link_libraries ( luajit liblua )
 
 ## INSTALL
