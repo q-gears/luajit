@@ -12,6 +12,9 @@
 
 
 project ( luajit C ASM)
+
+set( CMAKE_VERBOSE_MAKEFILE on )
+
 cmake_minimum_required ( VERSION 2.8 )
 include ( cmake/dist.cmake )
 include ( lua )
@@ -310,11 +313,12 @@ set ( LJCORE_C
 )
 
 add_library ( liblua SHARED ${LJCORE_C} ${DEPS} )
-set_target_properties(liblua PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
-target_link_libraries ( liblua ${LIBS} )
 if (APPLE)
-set_target_properties ( liblua PROPERTIES OUTPUT_NAME lua CLEAN_DIRECT_OUTPUT 1 )
+set_target_properties(liblua PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
 endif()
+target_link_libraries ( liblua ${LIBS} )
+set_target_properties ( liblua PROPERTIES OUTPUT_NAME lua CLEAN_DIRECT_OUTPUT 1 )
+
 
 ## LuaJIT Executable
 add_executable ( luajit src/luajit.c src/luajit.rc )
