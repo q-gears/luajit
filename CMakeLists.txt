@@ -6,9 +6,10 @@
 
 # NOTE: This build is currently only supporting x86 targets, for other targets use the original makefile. Please do not submit bugs to the LuaJIT author in case this build fails, instead use http://github.com/LuaDist/luajit
 
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32")
-#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32")
-
+if (APPLE)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32")
+endif()
 
 
 project ( luajit C ASM)
@@ -187,7 +188,7 @@ if ( WIN32 )
 endif ()
 
 # 32bit vs 64bit
-if ( CMAKE_SIZEOF_VOID_P EQUAL 8 )
+if ( CMAKE_SIZEOF_VOID_P EQUAL 8 AND NOT APPLE )
   list ( APPEND DASM_FLAGS -D P64 )
 endif ()
 
