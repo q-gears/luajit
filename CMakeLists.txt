@@ -188,7 +188,8 @@ if ( WIN32 )
 endif ()
 
 # 32bit vs 64bit
-if ( CMAKE_SIZEOF_VOID_P EQUAL 8 AND NOT APPLE )
+#if ( CMAKE_SIZEOF_VOID_P EQUAL 8 AND NOT APPLE )
+if ( CMAKE_SIZEOF_VOID_P EQUAL 8 )
   list ( APPEND DASM_FLAGS -D P64 )
 endif ()
 
