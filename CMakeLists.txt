@@ -6,10 +6,10 @@
 
 # NOTE: This build is currently only supporting x86 targets, for other targets use the original makefile. Please do not submit bugs to the LuaJIT author in case this build fails, instead use http://github.com/LuaDist/luajit
 
-if (APPLE)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32")
-endif()
+#if (APPLE)
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32")
+#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32")
+#endif()
 
 
 project ( luajit C ASM)
@@ -94,7 +94,7 @@ if ( WIN32 AND NOT CYGWIN )
 
 elseif ( APPLE )
 # Required to prevent runtime crash on 64bit OSX - however this breaks 32bit compile
-#  set ( CMAKE_EXE_LINKER_FLAGS "-pagezero_size 10000 -image_base 100000000 -image_base 7fff04c4a000" )
+  set ( CMAKE_EXE_LINKER_FLAGS "-pagezero_size 10000 -image_base 100000000 -image_base 7fff04c4a000" )
   option ( LUA_USE_POSIX "Use POSIX functionality." ON )
   option ( LUA_USE_DLOPEN "Use dynamic linker to load modules." ON )
   set ( LJVM_MODE machasm )
@@ -314,18 +314,18 @@ set ( LJCORE_C
 )
 
 add_library ( liblua SHARED ${LJCORE_C} ${DEPS} )
-if (APPLE)
-set_target_properties(liblua PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
-endif()
+#if (APPLE)
+#set_target_properties(liblua PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
+#endif()
 target_link_libraries ( liblua ${LIBS} )
 set_target_properties ( liblua PROPERTIES OUTPUT_NAME lua CLEAN_DIRECT_OUTPUT 1 )
 
 
 ## LuaJIT Executable
 add_executable ( luajit src/luajit.c src/luajit.rc )
-if (APPLE)
-set_target_properties(luajit PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
-endif()
+#if (APPLE)
+#set_target_properties(luajit PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
+#endif()
 
 target_link_libraries ( luajit liblua )
 
