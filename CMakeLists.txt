@@ -331,5 +331,4 @@ add_executable ( luajit src/luajit.c src/luajit.rc )
 target_link_libraries ( luajit liblua )
 
 ## INSTALL
-install_library( liblua )
-
+install_library(liblua)
