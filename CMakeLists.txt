@@ -321,6 +321,9 @@ add_library ( liblua SHARED ${LJCORE_C} ${DEPS} )
 target_link_libraries ( liblua ${LIBS} )
 set_target_properties ( liblua PROPERTIES OUTPUT_NAME lua CLEAN_DIRECT_OUTPUT 1 )
 
+if(WIN32 OR APPLE)
+    install(TARGETS liblua RUNTIME DESTINATION .)
+endif()
 
 ## LuaJIT Executable
 add_executable ( luajit src/luajit.c src/luajit.rc )
@@ -331,4 +334,4 @@ add_executable ( luajit src/luajit.c src/luajit.rc )
 target_link_libraries ( luajit liblua )
 
 ## INSTALL
-install_library(liblua)
+#install_library(liblua)
