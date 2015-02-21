@@ -1,4 +1,4 @@
-# Copyright (C) 2007-2013 LuaDist.
+﻿# Copyright (C) 2007-2013 LuaDist.
 # Created by Peter Drahoš
 # Redistribution and use of this file is allowed according to the terms of the MIT license.
 # For details see the COPYRIGHT file distributed with LuaDist.
@@ -321,11 +321,12 @@ add_library ( liblua SHARED ${LJCORE_C} ${DEPS} )
 target_link_libraries ( liblua ${LIBS} )
 set_target_properties ( liblua PROPERTIES OUTPUT_NAME lua CLEAN_DIRECT_OUTPUT 1 )
 
-
-install(TARGETS liblua 
-RUNTIME DESTINATION .
-LIBRARY DESTINATION .
+if (APPLE OR WIN32)
+    install(TARGETS liblua 
+    RUNTIME DESTINATION .
+    LIBRARY DESTINATION .
 )
+endif()
 
 ## LuaJIT Executable
 add_executable ( luajit src/luajit.c src/luajit.rc )
