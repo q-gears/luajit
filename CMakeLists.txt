@@ -1,4 +1,4 @@
-﻿# Copyright (C) 2007-2013 LuaDist.
+# Copyright (C) 2007-2013 LuaDist.
 # Created by Peter Drahoš
 # Redistribution and use of this file is allowed according to the terms of the MIT license.
 # For details see the COPYRIGHT file distributed with LuaDist.
