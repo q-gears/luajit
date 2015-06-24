@@ -209,8 +209,8 @@ list ( APPEND DASM_FLAGS -D VER=${DASM_VER} )
 
 string ( REPLACE ";" " " DASM_FLAGS_STR "${DASM_FLAGS}")
 
-message ( "DASM_FLAGS: ${DASM_FLAGS_STR}")
-message ( "DASM_ARCH: ${DASM_ARCH}" )
+message ( STATUS "DASM_FLAGS: ${DASM_FLAGS_STR}")
+message ( STATUS "DASM_ARCH: ${DASM_ARCH}" )
 
 set ( DASM_DASC ${CMAKE_CURRENT_SOURCE_DIR}/src/vm_${DASM_ARCH}.dasc )
 
