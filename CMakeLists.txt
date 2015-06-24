@@ -321,7 +321,8 @@ add_library ( liblua SHARED ${LJCORE_C} ${DEPS} )
 target_link_libraries ( liblua ${LIBS} )
 set_target_properties ( liblua PROPERTIES OUTPUT_NAME lua CLEAN_DIRECT_OUTPUT 1 )
 
-if (APPLE OR WIN32)
+# Installed manually for APPLE for correct bundle paths
+if (WIN32)
     install(TARGETS liblua 
     RUNTIME DESTINATION .
     LIBRARY DESTINATION .
