@@ -81,7 +81,7 @@ set ( LUA_CPATH_DEFAULT "./?${LUA_MODULE_SUFFIX};${LUA_DIR}${LUA_CDIR}/?${LUA_MO
 
 if ( WIN32 AND NOT CYGWIN )
   # Windows systems
-  add_definitions ( -DLUA_BUILD_AS_DLL -DLUAJIT_OS=LUAJIT_OS_WINDOWS)
+  add_definitions (-DLUAJIT_OS=LUAJIT_OS_WINDOWS)
   option ( LUA_BUILD_WLUA "Build wluajit interpreter for no-console applications." ON )
   set ( LJVM_MODE peobj )
   # Paths (Double escapes needed)
@@ -314,7 +314,7 @@ set ( LJCORE_C
   ${LJLIB_C}
 )
 
-add_library ( liblua SHARED ${LJCORE_C} ${DEPS} )
+add_library ( liblua STATIC ${LJCORE_C} ${DEPS} )
 #if (APPLE)
 #set_target_properties(liblua PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
 #endif()
@@ -322,12 +322,12 @@ target_link_libraries ( liblua ${LIBS} )
 set_target_properties ( liblua PROPERTIES OUTPUT_NAME lua CLEAN_DIRECT_OUTPUT 1 )
 
 # Installed manually for APPLE for correct bundle paths
-if (WIN32)
-    install(TARGETS liblua 
-    RUNTIME DESTINATION .
-    LIBRARY DESTINATION .
-)
-endif()
+#if (WIN32)
+#    install(TARGETS liblua 
+#    RUNTIME DESTINATION .
+#    LIBRARY DESTINATION .
+#)
+#endif()
 
 ## LuaJIT Executable
 add_executable ( luajit src/luajit.c src/luajit.rc )
